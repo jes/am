@@ -3,17 +3,11 @@
 
 #include "am.h"
 
-int	*value;
 char	taken[10];
 
-/*	solves the alphametic from the information in the count[] and minimum[]	*/
-/*	arrays, storing letter values in the value[] array, which is allocated	*/
-/*	by this function.	*/
 /*	returns 1 if a solution is found and 0 otherwise	*/
+/*	stores values for the letters in letter[x].value	*/
 int solve(void) {
-	/* allocate value array */
-	value = malloc(sizeof(int) * letters);
-
 	/* if more than 10 letters, there can be no solution */
 	if(letters > 10) return 0;
 
@@ -35,11 +29,11 @@ int solve_letter(int n) {
 		else	return 0;
 	}
 
-	for(v = minimum[n]; v < 10; v++) {
+	for(v = letter[n].min; v < 10; v++) {
 		if(taken[v]) continue;
 
 		taken[v] = 1;
-		value[n] = v;
+		letter[n].value = v;
 
 		if(solve_letter(n + 1)) return 1;
 
@@ -56,7 +50,7 @@ int evaluate(void) {
 	intmax_t val = bias;
 
 	for(i = 0; i < letters; i++) {
-		val += count[i] * value[i];
+		val += letter[i].count * letter[i].value;
 	}
 
 	return val;

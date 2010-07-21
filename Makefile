@@ -3,6 +3,7 @@
 
 CFLAGS=-Wall -g
 OBJS=am.o letters.o solver.o
+PREFIX?=/usr
 
 all: am
 .PHONY: all
@@ -10,5 +11,9 @@ all: am
 clean:
 	-rm -f am $(OBJS)
 .PHONY: clean
+
+install:
+	install -m 0755 am $(DESTDIR)$(PREFIX)/bin
+.PHONY: install
 
 am: $(OBJS)

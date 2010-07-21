@@ -8,16 +8,22 @@
 #include <stdio.h>
 #include <ctype.h>
 
+/* a structure for containing all information about a letter */
+typedef struct {
+	char	c;	/* the character	*/
+	intmax_t	count;	/* number of this letter in the sum	*/
+	int	min;	/* minimum value for this letter	*/
+	int	value;	/* the digit assigned to this letter	*/
+} Letter;
+
 /* am.c */
 void	fail(const char *fmt, ...);
 int	iswhite(int c);
 
 /* letters.c */
-extern char	*letter;
-extern intmax_t	*count;
-extern int	*minimum;
-extern intmax_t	bias;
+extern Letter	*letter;
 extern int	letters;
+extern intmax_t	bias;
 
 void	add_letter(char c, intmax_t scale, int min);
 

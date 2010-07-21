@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
 
 	/* output the letter values */
 	for(i = 0; i < letters; i++) {
-		printf("%c: %d\n", letter[i], value[i]);
+		printf("%c: %d\n", letter[i].c, letter[i].value);
 	}
 
 	return 0;

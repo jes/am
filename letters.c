@@ -3,11 +3,9 @@
 
 #include "am.h"
 
-char	*letter;
-intmax_t	*count;
-int	*minimum;
-intmax_t	bias;
+Letter	*letter;
 int	letters;
+intmax_t	bias;
 
 /*	Adds the given letter to the system.	*/
 /*	For example, given the input "SEND", you should call:	*/
@@ -24,30 +22,29 @@ void add_letter(char c, intmax_t scale, int min) {
 		return;
 	}
 
-	/* try to find c in the "letter" array */
+	/* try to find the letter c */
 	for(i = 0; i < letters; i++) {
-		if(letter[i] == c) break;
+		if(letter[i].c == c) break;
 	}
 
-	/* c was not found in the array, extend arrays and add the letter */
+	/* c was not found, extend array and add the letter */
 	if(i == letters) {
 		letters++;
-		letter	= realloc(letter,	letters);
-		count	= realloc(count,	sizeof(intmax_t) * letters);
-		minimum	= realloc(minimum,	sizeof(int) * letters);
+		letter	= realloc(letter,	letters * sizeof(Letter));
 
-		letter[i]	= c;
-		count[i]	= 0;
-		minimum[i]	= min;
+		letter[i].c	= c;
+		letter[i].count	= 0;
+		letter[i].min	= min;
+		letter[i].value	= 0;
 	}
 
 	/* now increase the count by the scale */
-	count[i] += scale;
+	letter[i].count += scale;
 
 	/*	if the new minimum is greater than the old one, use it.	*/
 	/*	For example, if a letter is allowed to be 0 in one place but must be	*/
 	/*	at least 1 in another, then 1 is the real minimum.	*/
-	if(min > minimum[i]) minimum[i] = min;
+	if(min > letter[i].min) letter[i].min = min;
 
 	return;
 }
