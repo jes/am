@@ -4,6 +4,7 @@
 #include "am.h"
 
 char	taken[10];
+intmax_t	total;
 
 /*	returns 1 if a solution is found and 0 otherwise	*/
 /*	stores values for the letters in letter[x].value	*/
@@ -13,6 +14,8 @@ int solve(void) {
 
 	/* set each letter to be non-taken */
 	memset(taken, 0, sizeof(taken));
+
+	total = bias;
 
 	/* recursively solve letters, starting at letter 0 */
 	return solve_letter(0);
@@ -25,33 +28,23 @@ int solve_letter(int n) {
 
 	/* if we've reached the end, test this solution */
 	if(n == letters) {
-		if(evaluate() == 0)	return 1;
+		if(total == 0)	return 1;
 		else	return 0;
 	}
 
 	for(v = letter[n].min; v < 10; v++) {
 		if(taken[v]) continue;
 
-		taken[v] = 1;
 		letter[n].value = v;
+
+		taken[v] = 1;
+		total += v * letter[n].count;
 
 		if(solve_letter(n + 1)) return 1;
 
+		total -= v * letter[n].count;
 		taken[v] = 0;
 	}
 
 	return 0;
-}
-
-/*	evaluates the alphametic using the values specified in value[] and count[]	*/
-/*	a value of 0 indicates that a solution has been found	*/
-int evaluate(void) {
-	int i;
-	intmax_t val = bias;
-
-	for(i = 0; i < letters; i++) {
-		val += letter[i].count * letter[i].value;
-	}
-
-	return val;
 }

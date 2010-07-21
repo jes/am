@@ -32,4 +32,3 @@ extern int *value;
 
 int	solve(void);
 int	solve_letter(int n);
-int	evaluate(void);
