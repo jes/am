@@ -27,7 +27,6 @@ int main(int argc, char **argv) {
 	int	i;
 	int	k = 1, k1 = 1;
 	intmax_t	scale;
-	intmax_t	bias = 0;
 	char	*start, *stop;
 	char	*p;
 
@@ -63,13 +62,20 @@ int main(int argc, char **argv) {
 
 			/* there is a word in [start, stop), add all letters */
 			for(p = stop - 1, scale = 1; p >= start; p--, scale *= 10) {
-				if(isdigit(*p))	bias += k * k1 * scale * (*p - '0');
-				else	add_letter(*p, (k * k1 * scale), (p == start));
+				add_letter(*p, (k * k1 * scale), (p == start));
 			}
 
 			/* start at where we finished for next time */
 			start = stop;
 		}
+	}
+
+	/* solve this problem */
+	if(solve() == 0) fail("No solution.\n");
+
+	/* output the letter values */
+	for(i = 0; i < letters; i++) {
+		printf("%c: %d\n", letter[i], value[i]);
 	}
 
 	return 0;

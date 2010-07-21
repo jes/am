@@ -2,7 +2,7 @@
 #James Stanley 2010
 
 CFLAGS=-Wall -g
-OBJS=am.o letters.o
+OBJS=am.o letters.o solver.o
 
 all: am
 .PHONY: all

@@ -6,6 +6,7 @@
 char	*letter;
 intmax_t	*count;
 int	*minimum;
+intmax_t	bias;
 int	letters;
 
 /*	Adds the given letter to the system.	*/
@@ -14,9 +15,14 @@ int	letters;
 /*	  add_letter('N', 10, 0); add_letter('D', 1, 0);	*/
 /*	c specifies the letter, scale the amount, and min the minimum value	*/
 /*	Use a negative value for scale if appropriate.	*/
-/*	Returns the index to use for letter c in the letter arrays	*/
-int add_letter(char c, intmax_t scale, int min) {
+void add_letter(char c, intmax_t scale, int min) {
 	int i;
+
+	/* if it's a digit, adjust the bias */
+	if(isdigit(c)) {
+		bias += scale * (c - '0');
+		return;
+	}
 
 	/* try to find c in the "letter" array */
 	for(i = 0; i < letters; i++) {
@@ -43,5 +49,5 @@ int add_letter(char c, intmax_t scale, int min) {
 	/*	at least 1 in another, then 1 is the real minimum.	*/
 	if(min > minimum[i]) minimum[i] = min;
 
-	return i;
+	return;
 }
