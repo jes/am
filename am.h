@@ -12,8 +12,9 @@ void	fail(const char *fmt, ...);
 int	iswhite(int c);
 
 /* letters.c */
-extern	char	*letter;
-extern	intmax_t	*count;
-extern	int	letters;
+extern char	*letter;
+extern intmax_t	*count;
+extern int	*minimum;
+extern int	letters;
 
-void	add_letter(char c, intmax_t scale);
+void	add_letter(char c, intmax_t scale, int min);
