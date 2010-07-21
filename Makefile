@@ -2,7 +2,7 @@
 #James Stanley 2010
 
 CFLAGS=-Wall -g
-OBJS=am.o
+OBJS=am.o letters.o
 
 all: am
 .PHONY: all
@@ -12,4 +12,3 @@ clean:
 .PHONY: clean
 
 am: $(OBJS)
-
