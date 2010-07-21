@@ -40,7 +40,7 @@ You can also set DESTDIR, for example to install somewhere under /opt.
 
 The interface is mostly fairly intuitive. To solve the puzzle given above,
 run the program as  
-  `$ am SEND + MORE = MONEY`
+  `$ am SEND + MORE = MONEY`  
 and it will output the value to be used for each letter. If some digits are
 given as part of the problem, just write them in:  
   `$ am S5N7 + MO8E = MO6EY`
