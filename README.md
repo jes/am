@@ -15,7 +15,7 @@ There is a git repository at [github](http://github.com/jes/am).
 
 A sum is expressed with the numbers changed to letters.
 
-For example:
+For example:  
   `SEND + MORE = MONEY`
 
 The puzzle is to find out which digit S corresponds to, which one E corresponds
